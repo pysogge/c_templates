@@ -1,42 +1,43 @@
-# make PLATFORM=Linux ARCH=aarch64
-# make clean PLATFORM=Darwin MACHINE=arm64
+ARCH := $(shell uname -m)
 
-# Compiler and linker
+ifeq ($(ARCH), arm)
+  # Compiler and linker flags for Mac OS M1 (ARM)
+  CC = arm-apple-darwin11-clang
+  LDFLAGS = -L/usr/local/lib/arm
+else
+  # Compiler and linker flags for Linux x86-64
+  CC = gcc
+  LDFLAGS = -L/usr/local/lib/x86_64
+endif
+
 CC = gcc
-LD = ld
+CFLAGS = -Wall -Werror -Wextra -O2
 
-# Compiler flags
-CFLAGS = -Wall -I/path/to/json-c/include
+SOURCES = $(wildcard *.c)
+OBJECTS = $(SOURCES:.c=.o)
+EXECUTABLES = $(SOURCES:.c=)
 
-# Linker flags
-LDFLAGS = -L/path/to/json-c/lib -ljson-c -linotify
+all: $(EXECUTABLES)
 
-# Target and source files
-TARGET = orchestrate
-SOURCES = orchestrate.c
+$(EXECUTABLES): $(OBJECTS)
+	-$(CC) $(CFLAGS) $@.o -o $@
 
-# Platform-specific compiler and linker flags
-PLATFORM = $(shell uname -s)
-ifeq ($(PLATFORM),Linux)
-  ARCH = $(shell uname -m)
-  ifeq ($(ARCH),aarch64)
-    CFLAGS += -march=armv8-a
-  endif
-endif
-ifeq ($(PLATFORM),Darwin)
-  MACHINE = $(shell uname -m)
-  ifeq ($(MACHINE),arm64)
-    CFLAGS += -march=armv8-a
-  endif
-endif
+%.o: %.c
+	-$(CC) $(CFLAGS) -c $< -o $@
 
-# Build target
-$(TARGET): $(SOURCES)
-	$(CC) $(CFLAGS) -o $(TARGET) $(SOURCES) $(LDFLAGS)
-
-# Clean target
 clean:
-	rm -f $(TARGET)
+	rm -f $(EXECUTABLES) $(OBJECTS)
 
-# Phony targets
-.PHONY: clean
+
+# This Makefile uses the following variables:
+
+# CC: The C compiler to use (in this case, gcc)
+# CFLAGS: Compiler flags to use (in this case, -Wall, -Werror, -Wextra, and -O2)
+# SOURCES: A list of all .c files in the current directory (generated using the wildcard function)
+# OBJECTS: A list of object files corresponding to the .c files (generated using a pattern rule)
+# EXECUTABLES: A list of executable files corresponding to the .c files (generated using a pattern rule)
+# The Makefile has three targets: all, clean, and the default target (which builds the executables).
+
+# The all target depends on all of the executables and builds them by linking the corresponding object files.
+# The default target (which builds the executables) depends on the object files and builds them by compiling the .c files.
+# The clean target removes the executables and object files.
