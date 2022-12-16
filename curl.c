@@ -52,3 +52,12 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
+
+
+// This code defines a read_callback function that reads data from a file and copies it to a buffer. The read_callback function is used as the CURLOPT_READFUNCTION callback for the curl_easy_setopt function, and the file to be uploaded is passed as the CURLOPT_READDATA user data.
+
+// To use this code, you can compile it with a command like gcc -o putput put.c -lcurl, and then run it with a command like ./putput URL FILE, where URL is the URL of the server to receive the PUT request, and FILE is the path to the `.
+
+// gcc to compile the code for macos M1 arm64 architecture
+// gcc -arch arm64 -o putput put.c -lcurl
+// ./putput http://localhost:8080/putput.txt putput.txt
