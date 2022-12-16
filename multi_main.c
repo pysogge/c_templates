@@ -1,6 +1,7 @@
 // main.c
+// gcc main.c subroutine.c -o program
 
-#include "data.h"
+// #include "data.h"
 #include "subroutine.h"
 
 int main(int argc, char** argv) {

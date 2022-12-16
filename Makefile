@@ -1,32 +1,40 @@
-ARCH := $(shell uname -m)
+.PHONY: all
 
-ifeq ($(ARCH), arm)
-  # Compiler and linker flags for Mac OS M1 (ARM)
-  CC = arm-apple-darwin11-clang
-  LDFLAGS = -L/usr/local/lib/arm
-else
-  # Compiler and linker flags for Linux x86-64
-  CC = gcc
-  LDFLAGS = -L/usr/local/lib/x86_64
-endif
-
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra -O2
-
-SOURCES = $(wildcard *.c)
-OBJECTS = $(SOURCES:.c=.o)
-EXECUTABLES = $(SOURCES:.c=)
-
-all: $(EXECUTABLES)
-
-$(EXECUTABLES): $(OBJECTS)
-	-$(CC) $(CFLAGS) $@.o -o $@
-
-%.o: %.c
-	-$(CC) $(CFLAGS) -c $< -o $@
+crawl:
+	gcc crawl.c -o crawl.ex
 
 clean:
-	rm -f $(EXECUTABLES) $(OBJECTS)
+	rm -f *.ex *.o
+
+# ARCH := $(shell uname -m)
+
+# ifeq ($(ARCH), arm)
+#   # Compiler and linker flags for Mac OS M1 (ARM)
+#   CC = arm-apple-darwin11-clang
+#   LDFLAGS = -L/usr/local/lib/arm
+# else
+#   # Compiler and linker flags for Linux x86-64
+#   CC = gcc
+#   LDFLAGS = -L/usr/local/lib/x86_64
+# endif
+
+# CC = gcc
+# CFLAGS = -Wall -Werror -Wextra -O2
+
+# SOURCES = $(wildcard *.c)
+# OBJECTS = $(SOURCES:.c=.o)
+# EXECUTABLES = $(SOURCES:.c=)
+
+# all: $(EXECUTABLES)
+
+# $(EXECUTABLES): $(OBJECTS)
+# 	-$(CC) $(CFLAGS) $@.o -o $@
+
+# %.o: %.c
+# 	-$(CC) $(CFLAGS) -c $< -o $@
+
+# clean:
+# 	rm -f $(EXECUTABLES) $(OBJECTS)
 
 
 # This Makefile uses the following variables:

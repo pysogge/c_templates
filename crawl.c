@@ -21,15 +21,22 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    // get the leaf directory name of the current working directory
-    const char* current_dir_name = strrchr(cwd, '/');
+    // get the leaf directory name of the current working directory, not including the leading or trailing '/'
+    const char* current_dir_name = strrchr(cwd, '/') + 1;
     if (current_dir_name == NULL) {
         fprintf(stderr, "Error: Could not get current directory name\n");
         return 1;
     }
 
     // Crawl up the directory tree until the target directory is found
-    while (strcmp(current_dir_name, target_dir) != 0) {
+    while (strcmp(current_dir_name, target_dir_name) != 0) {
+        // If we've made it all the way up to "/", then the target directory was not found
+        // return an error
+        if (strcmp(cwd, "/") == 0) {
+            fprintf(stderr, "Error: Could not find directory '%s'\n", target_dir_name);
+            return 1;
+        }
+
         // Change to the parent directory
         if (chdir("..") != 0) {
             perror("chdir");
@@ -42,10 +49,10 @@ int main(int argc, char* argv[]) {
             return 1;
         }
 
-        // If we've made it all the way up to "/", then the target directory was not found
-        // return an error
-        if (strcmp(cwd, "/") == 0) {
-            fprintf(stderr, "Error: Could not find directory '%s'\n", target_dir_name);
+        // get the leaf directory name of the current working directory, not including the leading or trailing '/'
+        current_dir_name = strrchr(cwd, '/') + 1;
+        if (current_dir_name == NULL) {
+            fprintf(stderr, "Error: Could not get current directory name\n");
             return 1;
         }
     }
