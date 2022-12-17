@@ -1,5 +1,6 @@
 // main.c
-// gcc main.c subroutine.c -o program
+// gcc main.c subroutine.c -o main.ex
+// ./main.ex
 
 // #include "data.h"
 #include "subroutine.h"

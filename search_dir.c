@@ -6,6 +6,10 @@ int search_directory(const char *dirname, const char *subdirname) {
     DIR *dir;
     struct dirent *entry;
 
+    // check if dirname is empty
+    if (dirname == NULL || strlen(dirname) == 0)
+        return -1;
+
     // Open the directory specified by dirname
     dir = opendir(dirname);
     if (dir == NULL) {
