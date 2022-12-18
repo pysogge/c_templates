@@ -2,6 +2,9 @@
 
 all: crawl parallel pthreads_mutex
 
+aes:
+	gcc aes.c -o aes.ex
+
 crawl:
 	gcc crawl.c -o crawl.ex
 
@@ -11,11 +14,23 @@ parallel:
 pthreads_mutex:
 	gcc pthreads_mutex.c -o pthreads_mutex.ex -lpthread
 
+prompt:
+	gcc prompt.c -o prompt.ex
+
+prompt-safe:
+	gcc prompt-safe.c -o prompt-safe.ex
+
 multi_2:
 	gcc multi_2_main.c -o multi_2.ex -lpthread
 
 hpc_vectorization:
 	gcc hpc_vectorization.c -o hpc_vectorization.ex -lpthread
+
+sockets_http:
+	gcc sockets_http.c -o sockets_http.ex
+
+yaml_parse:
+	gcc yaml_parse.c -o yaml_parse.ex
 
 clean:
 	rm -f *.ex *.o
