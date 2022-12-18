@@ -1,2 +1,4 @@
 .vscode
 archive
+*.ex
+*.o

@@ -15,6 +15,15 @@ int main(int argc, char* argv[]) {
     // Allocate a buffer to hold the current working directory
     char cwd[1024];
 
+    // Allocate a buffer to hold the directory where the current binary is located
+    char binary_dir[1024];
+
+    // Get the directory where the current binary is located
+    if (readlink("/proc/self/exe", binary_dir, sizeof(binary_dir)) == -1) {
+        perror("readlink");
+        return 1;
+    }
+
     // Get the current working directory
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
         perror("getcwd");

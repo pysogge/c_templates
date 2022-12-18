@@ -1,10 +1,26 @@
 .PHONY: all
 
+all: crawl parallel pthreads_mutex
+
 crawl:
 	gcc crawl.c -o crawl.ex
 
+parallel:
+	gcc parallel_compute.c -o parallel_compute.ex -lpthread
+
+pthreads_mutex:
+	gcc pthreads_mutex.c -o pthreads_mutex.ex -lpthread
+
+multi_2:
+	gcc multi_2_main.c -o multi_2.ex -lpthread
+
+hpc_vectorization:
+	gcc hpc_vectorization.c -o hpc_vectorization.ex -lpthread
+
 clean:
 	rm -f *.ex *.o
+
+
 
 # ARCH := $(shell uname -m)
 
