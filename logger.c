@@ -1,3 +1,16 @@
+// use malloc
+#include <stdlib.h>
+// use dirname
+#include <libgen.h>
+// use mkdir
+#include <sys/stat.h>
+// use printf
+#include <stdio.h>
+// use time
+#include <time.h>
+// use strftime
+#include <string.h>
+
 #include "logger.h"
 
 struct Logger *create_logger(int log_level, char *log_file_path) {
@@ -29,14 +42,14 @@ struct Logger *create_logger(int log_level, char *log_file_path) {
 void LOG(struct Logger *logger, int level, char *message) {
     // Print to console if log level is less than or equal to the logger's log level
     if (level <= logger->log_level) {
-        printf("[%s] %s\n", #level, message);
+        printf("[%d] %s\n", level, message);
     }
 
     // Append to log file regardless of log level, if log file path is not NULL, include timestamp
     if (logger->log_file_path != NULL) {
         FILE *log_file = fopen(logger->log_file_path, "a");
         if (log_file != NULL) {
-            fprintf(log_file, "[%s] %s\n", #level, message);
+            fprintf(log_file, "[%d] %s\n", level, message);
             fclose(log_file);
         }
     }

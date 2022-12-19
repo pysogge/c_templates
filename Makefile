@@ -8,6 +8,9 @@ aes:
 crawl_cwd:
 	gcc crawl_cwd.c -o crawl_cwd.ex
 
+logger-main:
+	gcc -o logger-main.ex logger-main.c logger.c
+
 dict:
 	gcc dict.c -o dict.ex
 
