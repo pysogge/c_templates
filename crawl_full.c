@@ -1,10 +1,10 @@
 // ./crawl_full target_directory_name
 
+#include <libgen.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <libgen.h>
-#include <stdlib.h>
 
 int main(int argc, char* argv[]) {
     // Check that a directory name was provided
@@ -25,10 +25,13 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    char* current_dir = strdup(full_path);
+
     // Crawl up the directory tree of the full path until the lead directory matches the name of the target directory
     while (1) {
         // Get the leaf directory name of the current working directory, not including the leading or trailing '/'
-        const char* current_dir_name = strrchr(full_path, '/') + 1;
+
+        const char* current_dir_name = strrchr(current_dir, '/') + 1;
         if (current_dir_name == NULL) {
             fprintf(stderr, "Error: Could not get current directory name\n");
             return 1;
@@ -41,26 +44,31 @@ int main(int argc, char* argv[]) {
 
         // If we've made it all the way up to "/", then the target directory was not found
         // return an error
-        if (strcmp(full_path, "/") == 0) {
+        if (strcmp(current_dir, "/") == 0) {
             fprintf(stderr, "Error: Could not find directory '%s'\n", target_dir_name);
             return 1;
         }
 
-        // Change to the parent directory
-        if (chdir("..") != 0) {
-            perror("chdir");
-            return 1;
-        }
+        // move up one directory from full_path
+        current_dir = strdup(dirname(current_dir));
 
-        // Get the realpath of the current working directory and save it to full_path
-        if (realpath(".", full_path) == NULL) {
-            perror("realpath");
-            return 1;
-        }
+        // printf("current_dir: %s\n", current_dir);
+
+        // // Change to the parent directory
+        // if (chdir("..") != 0) {
+        //     perror("chdir");
+        //     return 1;
+        // }
+
+        // // Get the realpath of the current working directory and save it to full_path
+        // if (realpath(".", full_path) == NULL) {
+        //     perror("realpath");
+        //     return 1;
+        // }
     }
 
     // Print the path of the target directory
-    printf("Found directory: %s\n", full_path);
+    printf("Found directory: %s\n", current_dir);
     return 0;
 }
 
