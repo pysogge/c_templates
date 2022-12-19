@@ -1,12 +1,15 @@
 .PHONY: all
 
-all: crawl parallel pthreads_mutex exe_dir
+all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir
 
 aes:
 	gcc aes.c -o aes.ex
 
-crawl:
-	gcc crawl.c -o crawl.ex
+crawl_cwd:
+	gcc crawl_cwd.c -o crawl_cwd.ex
+
+crawl_full:
+	gcc crawl_full.c -o crawl_full.ex
 
 exe_dir:
 	gcc exe_dir.c -o exe_dir.ex

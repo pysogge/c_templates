@@ -14,14 +14,7 @@ int main(int argc, char* argv[]) {
 
     // Allocate a buffer to hold the current working directory
     char cwd[1024];
-
-    // Allocate a buffer to hold the directory where the current binary is located
-    char binary_dir[1024];
-
-    // Get the directory where this program's file is located in unix
     
-
-
     // Get the current working directory
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
         perror("getcwd");
