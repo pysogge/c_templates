@@ -7,19 +7,21 @@
 
 int main(void) {
 
-    // get a string that is the full path of ../build and save it to full_path
-    char full_path[1000];
-    char *path = "../build";
-    realpath(path, full_path);
+    // // get a string that is the full path of ../build and save it to full_path
+    // char full_path[1000];
+    // char *path = "../build";
+    // realpath(path, full_path);
 
-    // get a string that is the full path of ../build/config.yml
-    char full_path_config[1000];
-    char *path_config = "../build/config.yml";
-    realpath(path_config, full_path_config);
+    // // get a string that is the full path of ../build/config.yml
+    // char full_path_config[1000];
+    // char *path_config = "../build/config.yml";
+    // realpath(path_config, full_path_config);
 
-    // append filename onto full_path_config
-    char full_path_config_filename[1000];
-    strcpy(full_path_config_filename, full_path_config);
+    // // append filename onto full_path_config
+    // char full_path_config_filename[1000];
+    // strcpy(full_path_config_filename, full_path_config);
+    // strcat(full_path_config_filename, "/config.yml");
+
     
 
 

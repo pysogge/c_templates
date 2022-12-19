@@ -32,6 +32,7 @@ int main(int argc, char* argv[]) {
         // Get the leaf directory name of the current working directory, not including the leading or trailing '/'
 
         const char* current_dir_name = strrchr(current_dir, '/') + 1;
+        
         if (current_dir_name == NULL) {
             fprintf(stderr, "Error: Could not get current directory name\n");
             return 1;
@@ -65,6 +66,14 @@ int main(int argc, char* argv[]) {
         //     perror("realpath");
         //     return 1;
         // }
+
+        // // check if a file path like /tmp/image.png is a real found file
+        // if (access(full_path, F_OK) != -1) {
+        //     printf("File %s exists and is a file.\n", full_path);
+        // } else {
+        //     printf("File %s does not exist.\n", full_path);
+        // }
+
     }
 
     // Print the path of the target directory
