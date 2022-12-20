@@ -20,9 +20,10 @@ struct Logger *create_logger(int log_level, char *log_file_path) {
 
     // ensure the log dir exists before creating the log file
     if (log_file_path != NULL) {
-        char *log_dir = dirname(log_file_path);
+        char *log_dir_copy = strdup(log_file_path);
+        char *log_dir = dirname(log_dir_copy);
         mkdir(log_dir, 0777);
-        free(log_dir);
+        free(log_dir_copy);
 
         // create the log file, log timestamp
         FILE *log_file = fopen(log_file_path, "w");
@@ -40,8 +41,8 @@ struct Logger *create_logger(int log_level, char *log_file_path) {
 }
 
 void LOG(struct Logger *logger, int level, char *message) {
-    // Print to console if log level is less than or equal to the logger's log level
-    if (level <= logger->log_level) {
+    // Print to console if log level is greater than or equal to the logger's log level
+    if (level >= logger->log_level) {
         printf("[%d] %s\n", level, message);
     }
 

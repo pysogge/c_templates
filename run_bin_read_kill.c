@@ -26,18 +26,34 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    // Read from the stream and print the output
+    // Read from the stream and print the output line by line, after N lines, kill the process and break
     char line[1024];
+    int line_count = 0;
     while (fgets(line, sizeof(line), stream) != NULL) {
         printf("%s", line);
 
         // Check if the condition is met
-        if (/* condition is met */) {
+        if (line_count == 10) {
             // Terminate the binary
             kill(pid, SIGKILL);
             break;
         }
+
+        line_count++;
     }
+
+    // // Read from the stream and print the output
+    // char line[1024];
+    // while (fgets(line, sizeof(line), stream) != NULL) {
+    //     printf("%s", line);
+
+    //     // Check if the condition is met
+    //     if (/* condition is met */) {
+    //         // Terminate the binary
+    //         kill(pid, SIGKILL);
+    //         break;
+    //     }
+    // }
 
     // Close the stream
     pclose(stream);
