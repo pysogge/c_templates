@@ -18,21 +18,21 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    // Use the unused fd
-    // ...
-    // Open a new stdin pipe and connect it to the unused fd
-    int pipefd[2];
-    if (pipe(pipefd) == -1) {
-        perror("pipe");
+    // Use the unused fd to open a file
+    FILE* file = fdopen(fd, "r");
+    if (file == NULL) {
+        perror("fdopen");
         return 1;
     }
 
-    // Close the read end of the pipe
-    close(pipefd[0]);
-
-    // Connect the write end of the pipe to the unused fd
-    dup2(pipefd[1], fd);
-    
+    // Read from the file
+    char buffer[1024];
+    if (fgets(buffer, sizeof(buffer), file) == NULL) {
+        if (ferror(file)) {
+            perror("fgets");
+        }
+        return 1;
+    }
 
     return 0;
 }
