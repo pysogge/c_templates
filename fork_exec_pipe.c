@@ -34,10 +34,14 @@ int main(int argc, char** argv) {
         // Connect the write end of the pipe to the parent's standard output.
         // dup2(pipefd[1], STDOUT_FILENO);
 
+        // Connect the read end of the pipe to a new unused fd
+        int newfd = 3;
+        dup2(pipefd[0], newfd);
+
         // CLose the write end of the pipe.
         close(pipefd[1]);
 
-        // While there is data, read a lien from the pipe and print it to the screen, but after five lines, break
+        // While there is data, read a line from the pipe and print it to the screen, but after five lines, break
         char buf[1024];
         int i = 0;
         while (read(pipefd[0], buf, sizeof(buf)) > 0) {
@@ -46,6 +50,19 @@ int main(int argc, char** argv) {
                 break;
             }
         }
+
+        // While there is data, read a line from the pipe with fgets and print it to the screen, but after five lines, break
+        // char buf[1024];
+        // int i = 0;
+        // while (fgets(buf, sizeof(buf), pipefd[0]) != NULL) {
+        //     printf("%s", buf);
+        //     if (++i == 5) {
+        //         break;
+        //     }
+        // }
+
+        // close the read end of the pipe
+        close(pipefd[0]);
 
         // kill the child process
         kill(pid, SIGKILL);
