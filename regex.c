@@ -36,3 +36,7 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
+
+// This code will compile the regex "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" using regcomp, and then test the string "user@example.com" against the compiled regex using regexec. If the string matches the regex, it will print a message. If the string does not match the regex, it will print a different message. If there is an error executing the regex, it will print an error message.
+
+// Note that the regex in this example is a regex that matches email addresses. You can use any regex that you desire in place of this regex. Just be sure to update the regex string in the regcomp function and the string to be tested in the regexec function as needed.
