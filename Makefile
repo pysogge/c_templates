@@ -1,9 +1,12 @@
 .PHONY: all
 
-all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex
+all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector
 
 aes:
 	gcc aes.c -o aes.ex
+
+array_vector:
+	gcc array_vector.c -o array_vector.ex
 
 crawl_cwd:
 	gcc crawl_cwd.c -o crawl_cwd.ex
