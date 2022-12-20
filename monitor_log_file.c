@@ -44,6 +44,7 @@ int main(int argc, char *argv[]) {
                     perror("Error opening log file");
                     return 1;
                 }
+
             }
         }
 

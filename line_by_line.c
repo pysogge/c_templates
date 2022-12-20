@@ -3,7 +3,7 @@
 
 int main(int argc, char *argv[]) {
   // Open the file for reading
-  FILE *fp = fopen("file.txt", "r");
+  FILE *fp = fopen("file.txt", "w");
 
   // Declare a buffer for reading the lines of the file
   char line[1024];
@@ -15,6 +15,8 @@ int main(int argc, char *argv[]) {
       // If the line includes the substring, print it
       printf("%s", line);
     }
+    // overwite the entire file contents with just a ""
+    fputs("", fp);
   }
 
   // Close the file

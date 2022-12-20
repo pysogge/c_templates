@@ -1,6 +1,6 @@
 .PHONY: all
 
-all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector
+all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline
 
 aes:
 	gcc aes.c -o aes.ex
@@ -10,6 +10,9 @@ array_vector:
 
 crawl_cwd:
 	gcc crawl_cwd.c -o crawl_cwd.ex
+
+fflush_printline:
+	gcc fflush_printline.c -o fflush_printline.ex
 
 regex:
 	gcc regex.c -o regex.ex
