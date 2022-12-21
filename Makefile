@@ -1,6 +1,6 @@
 .PHONY: all
 
-all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between random_filename args_list time_string
+all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between random_filename args_list time_string dict_d dict_do
 
 aes:
 	gcc aes.c -o aes.ex
@@ -34,6 +34,12 @@ logger-main:
 
 dict:
 	gcc dict.c -o dict.ex
+
+dict_d:
+	gcc dict_d.c -o dict_d.ex
+
+dict_do:
+	gcc dict_do.c -o dict_do.ex
 
 crawl_full:
 	gcc crawl_full.c -o crawl_full.ex

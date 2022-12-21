@@ -10,6 +10,7 @@ struct dict_entry {
     struct dict_entry *next;
 };
 
+// a dict with a fixed size
 struct dict {
     struct dict_entry *entries[DICT_SIZE];
 };
