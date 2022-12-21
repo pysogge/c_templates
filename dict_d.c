@@ -107,36 +107,15 @@ char *dict_d_get(struct dict_d *d, char *key) {
 
 int main() {
     struct dict_d *d = dict_d_create();
-    dict_d_add(d, "key1", "value1");
-    dict_d_add(d, "key2", "value2");
-    dict_d_add(d, "key3", "value3");
-    dict_d_add(d, "key4", "value4");
-    dict_d_add(d, "key5", "value5");
-    dict_d_add(d, "key6", "value6");
-    dict_d_add(d, "key7", "value7");
-    dict_d_add(d, "key8", "value8");
-    dict_d_add(d, "key9", "value9");
-    dict_d_add(d, "key10", "value10");
-    dict_d_add(d, "key11", "value11");
-    dict_d_add(d, "key12", "value12");
-    dict_d_add(d, "key13", "value13");
-    dict_d_add(d, "key14", "value14");
-    dict_d_add(d, "key15", "value15");
-    dict_d_add(d, "key16", "value16");
-    dict_d_add(d, "key17", "value17");
-    dict_d_add(d, "key18", "value18");
-    dict_d_add(d, "key19", "value19");
-    dict_d_add(d, "key20", "value20");
-    dict_d_add(d, "key21", "value21");
-    dict_d_add(d, "key22", "value22");
-    dict_d_add(d, "key23", "value23");
-    dict_d_add(d, "key24", "value24");
-    dict_d_add(d, "key25", "value25");
-    dict_d_add(d, "key26", "value26");
-    dict_d_add(d, "key27", "value27");
-    dict_d_add(d, "key28", "value28");
-    dict_d_add(d, "key29", "value29");
-    dict_d_add(d, "key30", "value30");
+
+    // use a for loop to add 30 values like keyN valueN
+    for (int i = 0; i < 30; i++) {
+        char key[10];
+        char value[10];
+        sprintf(key, "key%d", i);
+        sprintf(value, "value%d", i);
+        dict_d_add(d, key, value);
+    }
 
     // print all keys and values
     for (int i = 0; i < d->size; i++) {
