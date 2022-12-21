@@ -1,6 +1,6 @@
 .PHONY: all
 
-all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between
+all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between random_filename
 
 aes:
 	gcc aes.c -o aes.ex
@@ -19,6 +19,9 @@ fflush_printline:
 
 regex:
 	gcc regex.c -o regex.ex
+
+random_filename:
+	gcc random_filename.c -o random_filename.ex
 
 logger-main:
 	gcc -o logger-main.ex logger-main.c logger.c
