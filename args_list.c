@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int my_vsprintf(char *str, const char *format, ...) {
     va_list args;
@@ -20,12 +21,18 @@ int my_vsprintf(char *str, const char *format, ...) {
 
 int main(void) {
     char str[64];
+
+    // malloc a string and pass it to my_vsprintf
+    char *str2 = malloc(64);
+
     int result = my_vsprintf(str, "The numbers are %d, %d, and %d", 123, 456, 78910);
     if (result >= 0) {
         printf("String: %s (length: %d).\n", str, result);
     } else {
         printf("Error formatting string!\n");
     }
+
+    free(str2);
 
     return 0;
 }
