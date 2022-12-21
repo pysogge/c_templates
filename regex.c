@@ -6,6 +6,9 @@ int main(int argc, char *argv[]) {
   // Declare a regex_t structure to hold the compiled regex
   regex_t regex;
 
+  // A regex to capture number between \"index\": and ,
+  const char * regstr1 = "\"index\":([0-9]+),";
+
   // Compile the regex using regcomp
   int rc = regcomp(&regex, "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", REG_EXTENDED);
   if (rc != 0) {

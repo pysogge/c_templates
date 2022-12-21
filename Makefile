@@ -1,9 +1,12 @@
 .PHONY: all
 
-all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline
+all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between
 
 aes:
 	gcc aes.c -o aes.ex
+
+json_single_parser:
+	gcc json_single_parser.c -o json_single_parser.ex
 
 array_vector:
 	gcc array_vector.c -o array_vector.ex
@@ -52,6 +55,9 @@ sockets_http:
 
 yaml_parse:
 	gcc yaml_parse.c -o yaml_parse.ex
+
+get_str_between:
+	gcc get_str_between.c -o get_str_between.ex
 
 clean:
 	rm -f *.ex *.o
