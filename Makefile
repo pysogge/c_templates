@@ -1,12 +1,33 @@
 .PHONY: all
 
-all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between random_filename args_list time_string dict_d dict_do new_string mkdir
+all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between random_filename args_list time_string dict_d dict_do new_string mkdir is_connected is_connected_any get_ips get_ifaces create_validate_dirs remove_dirs remove_all_files_in_dir
 
 aes:
 	gcc aes.c -o aes.ex
 
 args_list:
 	gcc args_list.c -o args_list.ex
+
+remove_all_files_in_dir:
+	gcc remove_all_files_in_dir.c -o remove_all_files_in_dir.ex
+
+remove_dirs:
+	gcc remove_dirs.c -o remove_dirs.ex
+
+create_validate_dirs:
+	gcc create_validate_dirs.c -o create_validate_dirs.ex
+
+get_ifaces:
+	gcc get_ifaces.c -o get_ifaces.ex
+
+get_ips:
+	gcc get_ips.c -o get_ips.ex
+
+is_connected:
+	gcc is_connected.c -o is_connected.ex
+
+is_connected_any:
+	gcc is_connected_any.c -o is_connected_any.ex
 
 mkdir:
 	gcc mkdir.c -o mkdir.ex
