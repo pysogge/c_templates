@@ -103,7 +103,7 @@ char *dict_d_get(struct dict_d *d, char *key) {
     return NULL;
 }
 
-// 
+//
 
 int main() {
     struct dict_d *d = dict_d_create();
@@ -117,13 +117,20 @@ int main() {
         dict_d_add(d, key, value);
     }
 
-    // print all keys and values
+    // print all keys and values (hash order)
     for (int i = 0; i < d->size; i++) {
         struct dict_entry *e = d->entries[i];
         while (e) {
             printf("%s: %s\n", e->key, e->value);
             e = e->next;
         }
+    }
+
+    // for all keys, print the value (index order)
+    for (int i = 0; i < 30; i++) {
+        char key[10];
+        sprintf(key, "key%d", i);
+        printf("%s\n", dict_d_get(d, key));
     }
 
     char path[100];
