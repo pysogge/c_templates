@@ -1,6 +1,8 @@
 #include <signal.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/wait.h>
+
 
 int run_command_asynchronously(const char *command, int signal_number) {
     // Fork the process
