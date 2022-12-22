@@ -1,12 +1,15 @@
 .PHONY: all
 
-all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between random_filename args_list time_string dict_d dict_do
+all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between random_filename args_list time_string dict_d dict_do new_string
 
 aes:
 	gcc aes.c -o aes.ex
 
 args_list:
 	gcc args_list.c -o args_list.ex
+
+new_string:
+	gcc new_string.c -o new_string.ex
 
 json_single_parser:
 	gcc json_single_parser.c -o json_single_parser.ex

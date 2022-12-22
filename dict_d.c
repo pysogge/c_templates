@@ -126,6 +126,12 @@ int main() {
         }
     }
 
+    char path[100];
+    strcpy(path, dict_d_get(d, "key1"));
+    int n = 7;
+    // concatenate a number to the path in the format of %08d
+    sprintf(path, "%s/%08d", path, n);
+
     dict_d_destroy(d);
 
     return 0;
