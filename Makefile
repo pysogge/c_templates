@@ -8,6 +8,9 @@ aes:
 args_list:
 	gcc args_list.c -o args_list.ex
 
+get_mount_path_64:
+	gcc get_mount_path_64.c -o get_mount_path_64.ex
+
 get_mount_path:
 	gcc get_mount_path.c -o get_mount_path.ex
 
