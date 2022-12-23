@@ -1,4 +1,6 @@
-#include <stdlib.h>
+// Not working
+
+
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
@@ -6,8 +8,19 @@
 #include <sys/stat.h>
 
 int mkdir_p(const char *path) {
+  if (path == NULL) {
+    // Invalid path
+    errno = EINVAL;
+    return 1;
+  }
+
   // Make a copy of the path
   char *copy = strdup(path);
+  if (copy == NULL) {
+    // Error allocating memory
+    errno = ENOMEM;
+    return 1;
+  }
 
   // Split the path into components
   char *component = copy;
@@ -16,24 +29,40 @@ int mkdir_p(const char *path) {
     // Split the component from the path
     *next = '\0';
 
+    if (*component == '\0') {
+      // Skip empty component (path starts with '/')
+      component = next + 1;
+      continue;
+    }
+
     // Create the component if it does not exist
-    if (mkdir(copy, 0777) == -1 && errno != EEXIST) {
-      // An error occurred while creating the directory
-      perror("Error creating directory");
-      free(copy);
-      return 1;
+    if (mkdir(copy, 0777) == -1) {
+      if (errno != EEXIST && errno != ENOTDIR) {
+        // An error occurred while creating the directory
+        perror("Error creating directory");
+        free(copy);
+        return 1;
+      }
     }
 
     // Advance to the next component
     component = next + 1;
   }
 
-  // Create the last component if it does not exist
-  if (mkdir(copy, 0777) == -1 && errno != EEXIST) {
-    // An error occurred while creating the directory
-    perror("Error creating directory");
+  if (*component == '\0') {
+    // Skip empty component (path ends with '/')
     free(copy);
-    return 1;
+    return 0;
+  }
+
+  // Create the last component if it does not exist
+  if (mkdir(copy, 0777) == -1) {
+    if (errno != EEXIST && errno != ENOTDIR) {
+      // An error occurred while creating the directory
+      perror("Error creating directory");
+      free(copy);
+      return 1;
+    }
   }
 
   // Free the copy of the path
