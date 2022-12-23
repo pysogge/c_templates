@@ -39,9 +39,9 @@ int main(int argc, char *argv[]) {
     // Get the mount path for the directory
     char *mount_path = get_mount_path(dir_path);
     if (mount_path != NULL) {
-        printf("Directory is mounted at %s.\n", mount_path);
+        printf("Directory is mounted at %s\n", mount_path);
     } else {
-        printf("Directory is not mounted.\n");
+        printf("Directory is not mounted\n");
     }
 
     // Free the mount path
