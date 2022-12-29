@@ -1,12 +1,15 @@
 .PHONY: all
 
-all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between random_filename args_list time_string dict_d dict_do new_string mkdir is_connected is_connected_any get_ips get_ifaces create_validate_dirs remove_dirs remove_all_files_in_dir async_fork_signal create_validate_dir is_filepath mkdir_p mv_link get_mount_path is_iface_available_mac
+all: crawl_cwd crawl_full parallel pthreads_mutex exe_dir dict regex array_vector fflush_printline json_single_parser get_str_between random_filename args_list time_string dict_d dict_do new_string mkdir is_connected is_connected_any get_ips get_ifaces create_validate_dirs remove_dirs remove_all_files_in_dir async_fork_signal create_validate_dir is_filepath mkdir_p mv_link get_mount_path is_iface_available_mac timestamp
 
 aes:
 	gcc aes.c -o aes.ex
 
 args_list:
 	gcc args_list.c -o args_list.ex
+
+timestamp:
+	gcc timestamp.c -o timestamp.ex
 
 is_iface_available:
 	gcc is_iface_available.c -o is_iface_available.ex
